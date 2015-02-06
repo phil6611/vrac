@@ -18,3 +18,24 @@ TEXT
 Processeur : ${cpu cpu}% - ${freq_g}GHz - ${hwmon 0 temp 1}C°  
 Mémoire : $memfree
 Actif depuis : $uptime
+
+#réseau
+${color2}${font URW Chancery L:style=Medium Italic:pixelsize=15}Réseau  ${color2}${hr}${font}
+
+${color} Down ${offset 45}${color1}${totaldown eth1} ${offset 8}${color}Up ${alignr}${color1}${totalup eth1}
+${color #656c75}${downspeedgraph eth0 22,150 5e7b7b d8deeb} ${color #656c75}${upspeedgraph eth1 22,150 99c8e8 618094}
+${offset 40}${voffset -21}${color1}${downspeedf eth0}k/s
+${offset 190}${voffset -14}${color1}${upspeedf eth0}k/s
+
+${color} eth1 : ${alignr}${color1}${addr eth1}${color} | ${color1}${texeci 3600 wget http://checkip.dyndns.org -O - -o /dev/null | cut -d : -f 2 | cut -d \< -f 1}
+${color} eth0 : ${alignr}${color1}192.169.0.2${color} | ${color1}${totaldown eth0}${color} |${color1}${totalup eth0}
+
+
+#disques durs
+${color2}${font URW Chancery L:style=Medium Italic:pixelsize=15}Disque Dur  ${color2}${hr}${font}
+
+${color}Racine  : ${color1}${fs_used_perc /}% ${alignr}${fs_free /} ${color}${fs_bar 5,120 /}
+${color}Home    : ${color1}${fs_used_perc /home/}% ${alignr}${fs_free /home/} ${color}${fs_bar 5,120 /home/}
+
+Local : sda ${hddtemp /dev/sda}°
+	sdb ${hddtemp /dev/sdb}°
